@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private float movementSpeed = 1;
+
+    public bool isHoldingHammer = false;
+
+    public bool isUsingAbility = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the player
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime);
+
+        Debug.Log("are yopu holding a hammer" + isHoldingHammer);
+
+        Debug.Log("are you using your ability " + isUsingAbility);
     }
 }
