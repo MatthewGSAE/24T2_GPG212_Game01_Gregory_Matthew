@@ -10,6 +10,8 @@ public class EnemyDetection : MonoBehaviour
     private PlayerController playerController;
     private float moveSpeed = 1f;
 
+    private bool gettingPlayer = false;
+
     private void Start()
     {
         // Ensure playerGameObject is assigned and has a PlayerController component
@@ -23,6 +25,14 @@ public class EnemyDetection : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (gettingPlayer)
+        {
+            EndGame();
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("Trigger Stay");
@@ -30,6 +40,7 @@ public class EnemyDetection : MonoBehaviour
         if (playerController != null && playerController.isUsingAbility)
         {
             MoveTowardsPlayer();
+            gettingPlayer = true;
             Debug.Log("Chasing player");
         }
     }
@@ -45,5 +56,10 @@ public class EnemyDetection : MonoBehaviour
 
         // Move the enemy towards the player
         transform.Translate(directionToPlayer * moveSpeed * Time.deltaTime);
+    }
+
+    void EndGame()
+    {
+        Time.timeScale = 0.5f;
     }
 }
