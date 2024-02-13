@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     private float movementSpeed = 1;
 
-    public bool isHoldingHammer = false;
+    public bool isHoldingKey = false;
+    public bool isHoldingAxe = false;
 
     public bool isUsingAbility = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
         // Move the player
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime);
 
-        Debug.Log("are yopu holding a hammer" + isHoldingHammer);
+        Debug.Log("are yopu holding a hammer" + isHoldingKey);
 
         Debug.Log("are you using your ability " + isUsingAbility);
     }

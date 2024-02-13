@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyDetection : MonoBehaviour
 {
@@ -27,21 +28,24 @@ public class EnemyDetection : MonoBehaviour
 
     private void Update()
     {
-        if (gettingPlayer)
+        if (gettingPlayer == true)
         {
-            EndGame();
+            StartCoroutine(EndGame());
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Trigger Stay");
-
-        if (playerController != null && playerController.isUsingAbility)
+        if(other.GetComponent<PlayerController>() != null)
         {
-            MoveTowardsPlayer();
-            gettingPlayer = true;
-            Debug.Log("Chasing player");
+            Debug.Log("Trigger Stay");
+
+            if (playerController != null && playerController.isUsingAbility)
+            {
+                MoveTowardsPlayer();
+                gettingPlayer = true;
+                Debug.Log("Chasing player");
+            }
         }
     }
 
@@ -58,8 +62,10 @@ public class EnemyDetection : MonoBehaviour
         transform.Translate(directionToPlayer * moveSpeed * Time.deltaTime);
     }
 
-    void EndGame()
+    IEnumerator EndGame()
     {
         Time.timeScale = 0.5f;
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(0);
     }
 }
