@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("are yopu holding a hammer" + isHoldingKey);
 
         Debug.Log("are you using your ability " + isUsingAbility);
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }
